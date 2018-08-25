@@ -12,4 +12,4 @@ export BTC_TRANS='[]'
 export ETH_TRANS=$(cat dnlds/eth.txt)
 
 bash trans.html.template > out/transeth.html
-
+cp index.html out/
