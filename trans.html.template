@@ -1,0 +1,45 @@
+cat<<EOF
+<HTML>
+
+<BODY>
+
+<h1>BTC</h1>
+
+<div id="btc"> </div>
+
+<h1>ETH</h1>
+
+<div id="eth"> </div>
+
+</BODY>
+
+<SCRIPT>
+
+var BTC_TRANS = ${BTC_TRANS};
+
+var ETH_TRANS = ${ETH_TRANS};
+
+function toQr(t) {
+	return "<p>" + t + '<br/><img src="http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=FFFFFF&amp;data=' + t + '&amp;qzone=1&amp;margin=0&amp;size=200x200&amp;ecc=L" alt="qr code" /></p><div id="' + t + '"></div>';
+}
+
+function toAddressHtml(tr) {
+	return "<h3> Transaction </H3> <h4> Address </h4> " + toQr(tr.from) + " <br /> <br /> <h4> Tx ID </h4> " + toQr(tr.tx_id) + " <br /> <br /> <br /> <hr />";
+}
+
+function writeTrans(id, trans) {
+	var html = "";
+	trans.map(t => toAddressHtml(t)).forEach(i => html += i);
+	document.getElementById(id).innerHTML = html;
+}
+
+
+writeTrans("btc", BTC_TRANS);
+
+writeTrans("eth", ETH_TRANS);
+
+</SCRIPT>
+
+</HTML>
+
+EOF
